@@ -1,0 +1,425 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.github.mzmine</groupId>
+	<artifactId>mzmine</artifactId>
+	<version>2.21</version>
+	<name>MZmine</name>
+	<description>MZmine is an open-source project delivering a software for mass spectrometry data processing, with the main focus on LC-MS data.</description>
+	<url>https://mzmine.github.io</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<cdk.version>1.5.12</cdk.version>
+		<jmztab.version>3.0.2</jmztab.version>
+	</properties>
+
+	<mailingLists>
+		<mailingList>
+			<name>mzmine-devel</name>
+			<subscribe>mzmine-devel+subscribe@googlegroups.com</subscribe>
+			<unsubscribe>mzmine-devel+unsubscribe@googlegroups.com</unsubscribe>
+			<post>mzmine-devel@googlegroups.com</post>
+			<archive>https://groups.google.com/forum/#!forum/mzmine-devel</archive>
+		</mailingList>
+	</mailingLists>
+
+	<scm>
+		<url>https://github.com/mzmine/mzmine2</url>
+		<connection>scm:git:git://github.com/mzmine/mzmine2.git</connection>
+		<developerConnection>scm:git:git@github.com/mzmine/mzmine2.git</developerConnection>
+	</scm>
+
+	<build>
+            
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/assembly.xml</descriptor>
+					</descriptors>
+					<finalName>MZmine-${project.version}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make</id>
+						<phase>package</phase>
+						<goals>
+							<goal>assembly</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<archive>
+						<index>true</index>
+						<manifest>
+							<addClasspath>false</addClasspath>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+					<argLine>-Xmx1024m</argLine>
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+            <resource>
+                <filtering>false</filtering>
+                <directory>${basedir}/src/main/native</directory>
+                <includes>
+                <include>libadapwavlet-0.0.0-mac-x86_64.so</include>
+                </includes>
+            </resource>
+		</resources>
+	</build>
+	<repositories>
+		<!--<repository>-->
+			<!-- jmzreader and jmzml repository -->
+			<!--<id>ebi-repo</id>
+			<name>The EBI Maven repository</name>
+			<url>http://www.ebi.ac.uk/~maven/m2repo/</url>-->
+			<!-- <url>http://www.ebi.ac.uk/intact/maven/nexus/content/repositories/ebi-repo/</url> -->
+		<!--</repository>-->
+		<repository>
+			<id>lib</id>
+			<name>MZmine local libraries</name>
+			<url>file://${project.basedir}/src/main/lib</url>
+		</repository>
+		<!-- Removed the FreeHEP repo, because the freehep-graphicsio-emf artifact 
+			is now in Maven Central <repository> <id>freehep-maven</id> <name>Maven FreeHEP</name> 
+			<url>http://java.freehep.org/maven2</url> </repository> -->
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.19</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>xml-apis</artifactId>
+					<groupId>xml-apis</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math</artifactId>
+			<version>2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.help</groupId>
+			<artifactId>javahelp</artifactId>
+			<version>2.0.05</version>
+		</dependency>
+		<dependency>
+			<groupId>edu.ucar</groupId>
+			<artifactId>netcdf4</artifactId>
+			<version>4.5.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ostermiller</groupId>
+			<artifactId>utils</artifactId>
+			<version>1.07.00</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.11.0</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>xml-apis</artifactId>
+					<groupId>xml-apis</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>1.4.01</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>nz.ac.waikato.cms.weka</groupId>
+			<artifactId>weka-stable</artifactId>
+			<version>3.6.13</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.jmol</groupId>
+			<artifactId>jmol</artifactId>
+			<version>13.0.14</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.14</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>1.7.14</version>
+		</dependency>
+
+		<!-- Start of CDK dependencies -->
+		<dependency>
+			<groupId>org.openscience.cdk</groupId>
+			<artifactId>cdk-core</artifactId>
+			<version>${cdk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openscience.cdk</groupId>
+			<artifactId>cdk-io</artifactId>
+			<version>${cdk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openscience.cdk</groupId>
+			<artifactId>cdk-standard</artifactId>
+			<version>${cdk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openscience.cdk</groupId>
+			<artifactId>cdk-silent</artifactId>
+			<version>${cdk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openscience.cdk</groupId>
+			<artifactId>cdk-formula</artifactId>
+			<version>${cdk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openscience.cdk</groupId>
+			<artifactId>cdk-sdg</artifactId>
+			<version>${cdk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openscience.cdk</groupId>
+			<artifactId>cdk-renderbasic</artifactId>
+			<version>${cdk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openscience.cdk</groupId>
+			<artifactId>cdk-renderawt</artifactId>
+			<version>${cdk.version}</version>
+		</dependency>
+
+		<!-- End of CDK dependencies -->
+
+		<dependency>
+			<groupId>uk.ac.ebi.jmzml</groupId>
+			<artifactId>jmzml</artifactId>
+			<version>1.7.4</version>
+		</dependency>
+
+		<!-- Start of Apache Axis 1.4 -->
+
+		<dependency>
+			<groupId>org.apache.axis</groupId>
+			<artifactId>axis</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-discovery</groupId>
+			<artifactId>commons-discovery</artifactId>
+			<version>0.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.axis</groupId>
+			<artifactId>axis-jaxrpc</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
+		<!-- End of Apache Axis -->
+
+		<!-- Start of JDBC drivers -->
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.3-1102-jdbc41</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.34</version>
+		</dependency>
+		<dependency>
+			<groupId>ojdbc</groupId>
+			<artifactId>ojdbc</artifactId>
+			<version>14</version>
+		 <type>pom</type>
+		</dependency>
+
+		<!-- End of JDBC drivers -->
+
+		<!-- Start of jars included with MZmine (internal repository) -->
+
+		<dependency>
+			<groupId>soap-apis</groupId>
+			<artifactId>metlin-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>soap-apis</groupId>
+			<artifactId>chemspider-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<!-- rosuda: REngine/Rserve -->
+		<dependency>
+			<groupId>org.rosuda.REngine</groupId>
+			<artifactId>Rserve</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+		<!-- rosuda: END -->
+
+		<dependency>
+			<groupId>mzmine</groupId>
+			<artifactId>macspecificsetup</artifactId>
+			<version>2.7</version>
+		</dependency>
+		<dependency>
+			<groupId>mzmine</groupId>
+			<artifactId>jmprojection</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>mzmine</groupId>
+			<artifactId>gslibml</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>mzmine</groupId>
+			<artifactId>visad</artifactId>
+			<version>20131024</version>
+		</dependency>
+
+
+		<!-- End of jars included with MZmine -->
+
+		<!-- Java3D dependencies ! -->
+		<dependency>
+			<groupId>org.jogamp.jogl</groupId>
+			<artifactId>jogl-all-main</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jogamp.gluegen</groupId>
+			<artifactId>gluegen-rt-main</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>java3d</groupId>
+			<artifactId>j3dcore</artifactId>
+			<version>1.6.0-pre12</version>
+		</dependency>
+		<dependency>
+			<groupId>java3d</groupId>
+			<artifactId>j3dutils</artifactId>
+			<version>1.6.0-pre12</version>
+		</dependency>
+		<dependency>
+			<groupId>java3d</groupId>
+			<artifactId>vecmath</artifactId>
+			<version>1.6.0-pre12</version>
+		</dependency>
+		<dependency>
+			<groupId>uk.ac.ebi.pride</groupId>
+			<artifactId>jmztab-modular-model</artifactId>
+			<version>${jmztab.version}</version>
+			<!-- based on mzTab specification version 1.0 RC5 -->
+			<exclusions>
+				<exclusion>
+					<artifactId>logback-classic</artifactId>
+					<groupId>ch.qos.logback</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>uk.ac.ebi.pride</groupId>
+			<artifactId>jmztab-modular-util</artifactId>
+			<version>${jmztab.version}</version>
+			<!-- based on mzTab specification version 1.0 RC5 -->
+			<exclusions>
+				<exclusion>
+					<artifactId>logback-classic</artifactId>
+					<groupId>ch.qos.logback</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>fop</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.freehep</groupId>
+			<artifactId>freehep-graphicsio-emf</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.msdk</groupId>
+			<artifactId>msdk-io-mzml</artifactId>
+			<version>0.0.4</version>
+		</dependency>
+	 <dependency>
+	  <groupId>adap</groupId>
+	  <artifactId>adap</artifactId>
+	  <version>0.0.1</version>
+	 </dependency>
+	</dependencies>
+
+</project>
