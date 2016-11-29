@@ -1,4 +1,0 @@
-export(getPeaks)
-import(ifultools)
-import(splus2R)
-import(wmtsa)
