@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>ojdbc</groupId>
-  <artifactId>ojdbc</artifactId>
-  <version>14</version>
-  <distributionManagement>
-    <status>deployed</status>
-  </distributionManagement>
-</project>
