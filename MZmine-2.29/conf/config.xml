@@ -5,14 +5,14 @@
         <parameter name="Retention time value format">#0.00</parameter>
         <parameter name="Intensity format">0.0E0</parameter>
         <parameter isautomatic="true" name="Number of concurrently running tasks">4</parameter>
-        <parameter name="Use proxy">
+        <parameter name="Use proxy" selected="false">
             <parameter name="Proxy adress"/>
             <parameter name="Proxy port"/>
         </parameter>
         <parameter name="R executable path"/>
         <parameter name="Send anonymous statistics">true</parameter>
         <parameter name="Window state">
-            <position>508:341</position>
+            <position>528:361</position>
             <size>1000:700</size>
             <maximized>false</maximized>
         </parameter>
@@ -20,10 +20,13 @@
     <modules>
         <module class="net.sf.mzmine.modules.peaklistmethods.gapfilling.peakfinder.PeakFinderModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Name suffix">gap-filled</parameter>
                 <parameter name="Intensity tolerance"/>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Retention time tolerance"/>
                 <parameter name="RT correction"/>
                 <parameter name="Remove original peak list"/>
@@ -31,7 +34,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.identification.nist.NistMsSearchModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="NIST MS Search directory"/>
                 <parameter name="Ionization method"/>
                 <parameter name="Spectrum RT tolerance"/>
@@ -43,7 +46,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.dataanalysis.projectionplots.SammonsPlotModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Raw data files" type="ALL_FILES"/>
                 <parameter name="Coloring type"/>
                 <parameter name="Peak measurement type"/>
@@ -53,7 +56,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.peakpicking.shapemodeler.ShapeModelerModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Suffix">shaped peaks</parameter>
                 <parameter name="Mass resolution"/>
                 <parameter name="Shape model"/>
@@ -62,7 +65,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.io.xmlexport.XMLExportModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Filename"/>
                 <parameter name="Compressed file"/>
             </parameters>
@@ -79,7 +82,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.filtering.peakcomparisonrowfilter.PeakComparisonRowFilterModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Name suffix">filtered</parameter>
                 <parameter name="1st peak column to compare (zero indexed)">0</parameter>
                 <parameter name="2nd peak column to compare (zero indexed)">1</parameter>
@@ -100,15 +103,18 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.gapfilling.samerange.SameRangeGapFillerModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Name suffix">gap-filled</parameter>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Remove original peak list"/>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.visualization.threed.ThreeDVisualizerModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Scans">
                     <ms_level>1</ms_level>
                 </parameter>
@@ -122,10 +128,13 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.identification.ms2search.Ms2SearchModule">
             <parameters>
-                <parameter name="Peak lists"/>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Mass list"/>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Minimum ion intensity to consider in MS2 comparison"/>
                 <parameter name="Minimum ion(s) matched per MS2 comparison"/>
                 <parameter name="Minimum score to report"/>
@@ -133,7 +142,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.io.metaboanalystexport.MetaboAnalystExportModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Filename"/>
                 <parameter name="Grouping parameter"/>
             </parameters>
@@ -147,36 +156,45 @@
             <parameters>
                 <parameter name="Charge"/>
                 <parameter name="Ionization type"/>
-                <parameter name="Peak lists"/>
-                <parameter name="m/z tolerance"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Elements">P[0-30]N[0-50]C[0-100]H[0-100]S[0-30]O[0-50]</parameter>
-                <parameter name="Element count heuristics">
+                <parameter name="Element count heuristics" selected="false">
                     <parameter name="H/C ratio">true</parameter>
                     <parameter name="NOPS/C ratios">true</parameter>
                     <parameter name="Multiple element counts">true</parameter>
                 </parameter>
-                <parameter name="RDBE restrictions">
+                <parameter name="RDBE restrictions" selected="false">
                     <parameter name="RDBE range">
                         <min>-1.0</min>
                         <max>40.0</max>
                     </parameter>
                     <parameter name="RDBE must be an integer">true</parameter>
                 </parameter>
-                <parameter name="Isotope pattern filter">
-                    <parameter name="Isotope m/z tolerance"/>
+                <parameter name="Isotope pattern filter" selected="false">
+                    <parameter name="Isotope m/z tolerance">
+                        <absolutetolerance>0.001</absolutetolerance>
+                        <ppmtolerance>5.0</ppmtolerance>
+                    </parameter>
                     <parameter name="Minimum absolute intensity"/>
                     <parameter name="Minimum score"/>
                 </parameter>
-                <parameter name="MS/MS filter">
+                <parameter name="MS/MS filter" selected="false">
                     <parameter name="Mass list"/>
-                    <parameter name="MS/MS m/z tolerance"/>
+                    <parameter name="MS/MS m/z tolerance">
+                        <absolutetolerance>0.001</absolutetolerance>
+                        <ppmtolerance>5.0</ppmtolerance>
+                    </parameter>
                     <parameter name="MS/MS score threshold"/>
                 </parameter>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.peakpicking.deconvolution.DeconvolutionModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Suffix">deconvoluted</parameter>
                 <parameter name="Algorithm">
                     <module name="Baseline cut-off">
@@ -254,7 +272,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.filtering.peakfilter.PeakFilterModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Name suffix">filtered</parameter>
                 <parameter name="Duration" selected="false">
                     <min>0.0</min>
@@ -290,7 +308,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.filtering.clearannotations.PeaklistClearAnnotationsModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Clear identities?"/>
                 <parameter name="Clear comments?"/>
             </parameters>
@@ -298,7 +316,7 @@
         <module class="net.sf.mzmine.modules.visualization.twod.TwoDVisualizerModule">
             <parameters>
                 <parameter name="Type of plot"/>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Scans">
                     <ms_level>1</ms_level>
                 </parameter>
@@ -315,7 +333,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.dataanalysis.clustering.ClusteringModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Peak measurement type"/>
                 <parameter name="Raw data files" type="ALL_FILES"/>
                 <parameter name="Peak list rows">
@@ -344,7 +362,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.peakpicking.adap3decompositionV1_5.ADAP3DecompositionV1_5Module">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Min cluster distance (min)">0.01</parameter>
                 <parameter name="Min cluster size">2</parameter>
                 <parameter name="Min cluster intensity">500.0</parameter>
@@ -361,7 +379,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.identification.adductsearch.AdductSearchModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="RT tolerance"/>
                 <parameter name="Adducts">
                     <adduct mass_difference="21.9825" name="[M+Na-H]" selected="false"/>
@@ -373,15 +391,21 @@
                     <adduct mass_difference="62.0004" name="[M+H2CO3]" selected="false"/>
                     <adduct mass_difference="5.0" name="[(Deuterium)]glycerol" selected="false"/>
                 </parameter>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Max relative adduct peak height">0.5</parameter>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.alignment.ransac.RansacAlignerModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Peak list name">Aligned peak list</parameter>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="RT tolerance"/>
                 <parameter name="RT tolerance after correction"/>
                 <parameter name="RANSAC iterations"/>
@@ -393,7 +417,7 @@
         </module>
         <module class="net.sf.mzmine.modules.rawdatamethods.filtering.alignscans.AlignScansModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Suffix">align</parameter>
                 <parameter name="Horizontal Scans">5</parameter>
                 <parameter name="Max Vertical Alignment">1</parameter>
@@ -404,7 +428,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.peakpicking.adap3decompositionV2.ADAP3DecompositionV2Module">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Min distance between analytes (min)">0.01</parameter>
                 <parameter name="Min cluster size">5</parameter>
                 <parameter name="Peak-Similarity tolerance">0.17</parameter>
@@ -414,20 +438,23 @@
         </module>
         <module class="net.sf.mzmine.modules.rawdatamethods.peakpicking.targetedpeakdetection.TargetedPeakDetectionModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Name suffix">detectedPeak</parameter>
                 <parameter name="Peak list file"/>
                 <parameter name="Field separator">,</parameter>
                 <parameter name="Ignore first line"/>
                 <parameter name="Intensity tolerance"/>
                 <parameter name="Noise level"/>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Retention time tolerance"/>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.dataanalysis.heatmaps.HeatMapModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Output name"/>
                 <parameter name="Output file type">pdf</parameter>
                 <parameter name="Sample parameter"/>
@@ -447,7 +474,7 @@
         </module>
         <module class="net.sf.mzmine.modules.visualization.msms.MsMsVisualizerModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Retention time"/>
                 <parameter name="m/z"/>
                 <parameter name="Intensity"/>
@@ -465,12 +492,15 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.identification.camera.CameraSearchModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="FWHM sigma">0.2</parameter>
                 <parameter name="FWHM percentage">0.01</parameter>
                 <parameter name="Isotopes max. charge">3</parameter>
                 <parameter name="Isotopes max. per cluster">4</parameter>
-                <parameter name="Isotopes mass tolerance"/>
+                <parameter name="Isotopes mass tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Correlation threshold">0.9</parameter>
                 <parameter name="Correlation p-value">0.05</parameter>
                 <parameter name="Ionization Polarity">positive</parameter>
@@ -484,7 +514,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.io.siriusexport.SiriusExportModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Filename"/>
                 <parameter name="include MS1">true</parameter>
                 <parameter name="Mass list"/>
@@ -497,7 +527,7 @@
         </module>
         <module class="net.sf.mzmine.modules.masslistmethods.shoulderpeaksfilter.ShoulderPeaksFilterModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Mass list"/>
                 <parameter name="Mass resolution"/>
                 <parameter name="Peak model function"/>
@@ -507,7 +537,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.io.csvexport.CSVExportModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Filename"/>
                 <parameter name="Field separator">,</parameter>
                 <parameter name="Export common elements"/>
@@ -519,16 +549,19 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.peakpicking.peakextender.PeakExtenderModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Name suffix">extended</parameter>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Min height"/>
                 <parameter name="Remove original peaklist"/>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.visualization.neutralloss.NeutralLossVisualizerModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="X axis"/>
                 <parameter name="Retention time"/>
                 <parameter name="Precursor m/z"/>
@@ -540,7 +573,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.identification.customdbsearch.CustomDBSearchModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Database file"/>
                 <parameter name="Field separator">,</parameter>
                 <parameter name="Field order">
@@ -551,15 +584,21 @@
                     <item>Formula</item>
                 </parameter>
                 <parameter name="Ignore first line"/>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Retention time tolerance"/>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.filtering.duplicatefilter.DuplicateFilterModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Name suffix">filtered</parameter>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="RT tolerance"/>
                 <parameter name="Require same identification"/>
                 <parameter name="Remove original peaklist"/>
@@ -567,18 +606,21 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.identification.glycerophospholipidsearch.GPLipidSearchModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Type of lipids"/>
                 <parameter name="Minimum fatty acid length"/>
                 <parameter name="Maximum fatty acid length"/>
                 <parameter name="Maximum number of double bonds"/>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Ionization method"/>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.rawdatamethods.filtering.cropper.CropFilterModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Scans"/>
                 <parameter name="m/z"/>
                 <parameter name="Suffix">filtered</parameter>
@@ -587,9 +629,12 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.isotopes.deisotoper.IsotopeGrouperModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Name suffix">deisotoped</parameter>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Retention time tolerance"/>
                 <parameter name="Monotonic shape"/>
                 <parameter name="Maximum charge"/>
@@ -605,7 +650,7 @@
         </module>
         <module class="net.sf.mzmine.modules.visualization.tic.TICVisualizerModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Scans">
                     <ms_level>1</ms_level>
                 </parameter>
@@ -624,7 +669,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.filtering.rowsfilter.RowsFilterModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Name suffix">filtered</parameter>
                 <parameter name="Minimum peaks in a row" selected="false"/>
                 <parameter name="Minimum peaks in an isotope pattern" selected="false"/>
@@ -655,9 +700,12 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.normalization.rtnormalizer.RTNormalizerModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Name suffix">normalized</parameter>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Retention time tolerance"/>
                 <parameter name="Minimum standard intensity"/>
                 <parameter name="Remove original peak list"/>
@@ -665,7 +713,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.dataanalysis.projectionplots.CDAPlotModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Raw data files" type="ALL_FILES"/>
                 <parameter name="Coloring type"/>
                 <parameter name="Peak measurement type"/>
@@ -675,7 +723,7 @@
         </module>
         <module class="net.sf.mzmine.modules.rawdatamethods.filtering.scanfilters.ScanFiltersModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Suffix">filtered</parameter>
                 <parameter name="Filter">
                     <module name="Savitzky-Golay filter">
@@ -698,12 +746,15 @@
         <module class="net.sf.mzmine.modules.tools.mzrangecalculator.MzRangeMassCalculatorModule">
             <parameters>
                 <parameter name="m/z"/>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.io.mgfexport.MGFExportModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Filename"/>
                 <parameter name="Fractional m/z values">false</parameter>
                 <parameter name="Merging Mode">Maximum</parameter>
@@ -711,7 +762,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.identification.onlinedbsearch.OnlineDBSearchModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Database">
                     <module name="KEGG Compound Database"/>
                     <module name="PubChem Compound Database"/>
@@ -727,9 +778,15 @@
                 </parameter>
                 <parameter name="Ionization type"/>
                 <parameter name="Number of results">100</parameter>
-                <parameter name="m/z tolerance"/>
-                <parameter name="Isotope pattern filter">
-                    <parameter name="Isotope m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
+                <parameter name="Isotope pattern filter" selected="false">
+                    <parameter name="Isotope m/z tolerance">
+                        <absolutetolerance>0.001</absolutetolerance>
+                        <ppmtolerance>5.0</ppmtolerance>
+                    </parameter>
                     <parameter name="Minimum absolute intensity"/>
                     <parameter name="Minimum score"/>
                 </parameter>
@@ -745,7 +802,7 @@
         </module>
         <module class="net.sf.mzmine.modules.visualization.histogram.HistogramVisualizerModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Raw data files"/>
                 <parameter name="Plotted data"/>
                 <parameter name="Number of bins">10</parameter>
@@ -756,14 +813,14 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.io.mztabexport.MzTabExportModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Filename"/>
                 <parameter name="Include all peaks"/>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.rawdatamethods.peakpicking.msms.MsMsPeakPickerModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Scans">
                     <ms_level>2</ms_level>
                 </parameter>
@@ -773,9 +830,12 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.identification.fragmentsearch.FragmentSearchModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Retention time tolerance"/>
-                <parameter name="m/z tolerance of MS2 data"/>
+                <parameter name="m/z tolerance of MS2 data">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Max fragment peak height">0.5</parameter>
                 <parameter name="Min MS2 peak height"/>
             </parameters>
@@ -789,7 +849,7 @@
         </module>
         <module class="net.sf.mzmine.modules.visualization.intensityplot.IntensityPlotModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Raw data files"/>
                 <parameter name="X axis value"/>
                 <parameter name="Y axis value"/>
@@ -801,7 +861,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.normalization.linear.LinearNormalizerModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Name suffix">normalized</parameter>
                 <parameter name="Normalization type"/>
                 <parameter name="Peak measurement type"/>
@@ -810,7 +870,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.orderpeaklists.OrderPeakListsModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.isotopes.isotopeprediction.IsotopePatternCalculator">
@@ -824,35 +884,44 @@
         <module class="net.sf.mzmine.modules.peaklistmethods.identification.formulaprediction.FormulaPredictionModule">
             <parameters>
                 <parameter name="Neutral mass"/>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Elements">P[0-30]N[0-50]C[0-100]H[0-100]S[0-30]O[0-50]</parameter>
-                <parameter name="Element count heuristics">
+                <parameter name="Element count heuristics" selected="false">
                     <parameter name="H/C ratio">true</parameter>
                     <parameter name="NOPS/C ratios">true</parameter>
                     <parameter name="Multiple element counts">true</parameter>
                 </parameter>
-                <parameter name="RDBE restrictions">
+                <parameter name="RDBE restrictions" selected="false">
                     <parameter name="RDBE range">
                         <min>-1.0</min>
                         <max>40.0</max>
                     </parameter>
                     <parameter name="RDBE must be an integer">true</parameter>
                 </parameter>
-                <parameter name="Isotope pattern filter">
-                    <parameter name="Isotope m/z tolerance"/>
+                <parameter name="Isotope pattern filter" selected="false">
+                    <parameter name="Isotope m/z tolerance">
+                        <absolutetolerance>0.001</absolutetolerance>
+                        <ppmtolerance>5.0</ppmtolerance>
+                    </parameter>
                     <parameter name="Minimum absolute intensity"/>
                     <parameter name="Minimum score"/>
                 </parameter>
-                <parameter name="MS/MS filter">
+                <parameter name="MS/MS filter" selected="false">
                     <parameter name="Mass list"/>
-                    <parameter name="MS/MS m/z tolerance"/>
+                    <parameter name="MS/MS m/z tolerance">
+                        <absolutetolerance>0.001</absolutetolerance>
+                        <ppmtolerance>5.0</ppmtolerance>
+                    </parameter>
                     <parameter name="MS/MS score threshold"/>
                 </parameter>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.rawdatamethods.filtering.scansmoothing.ScanSmoothingModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Suffix">smooth</parameter>
                 <parameter name="Time (min)">0.05</parameter>
                 <parameter name="Scan span">5</parameter>
@@ -864,7 +933,7 @@
         </module>
         <module class="net.sf.mzmine.modules.rawdatamethods.orderdatafiles.OrderDataFilesModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.tools.mzrangecalculator.MzRangeFormulaCalculatorModule">
@@ -872,12 +941,15 @@
                 <parameter name="Formula"/>
                 <parameter name="Ionization type"/>
                 <parameter name="Charge">1</parameter>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.masslistmethods.ADAPchromatogrambuilder.ADAPChromatogramBuilderModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Scans">
                     <ms_level>1</ms_level>
                 </parameter>
@@ -885,7 +957,10 @@
                 <parameter name="Min group size in # of scans"/>
                 <parameter name="Group intensity threshold"/>
                 <parameter name="Min highest intensity"/>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Suffix">chromatograms</parameter>
             </parameters>
         </module>
@@ -902,7 +977,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.peakpicking.smoothing.SmoothingModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Filename suffix">smoothed</parameter>
                 <parameter name="Filter width">5</parameter>
                 <parameter name="Remove original peak list"/>
@@ -910,25 +985,34 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.identification.complexsearch.ComplexSearchModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Ionization method"/>
                 <parameter name="Retention time tolerance"/>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Max complex peak height">0.5</parameter>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.alignment.join.JoinAlignerModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Peak list name">Aligned peak list</parameter>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Weight for m/z"/>
                 <parameter name="Retention time tolerance"/>
                 <parameter name="Weight for RT"/>
                 <parameter name="Require same charge state"/>
                 <parameter name="Require same ID"/>
-                <parameter name="Compare isotope pattern">
-                    <parameter name="Isotope m/z tolerance"/>
+                <parameter name="Compare isotope pattern" selected="false">
+                    <parameter name="Isotope m/z tolerance">
+                        <absolutetolerance>0.001</absolutetolerance>
+                        <ppmtolerance>5.0</ppmtolerance>
+                    </parameter>
                     <parameter name="Minimum absolute intensity"/>
                     <parameter name="Minimum score"/>
                 </parameter>
@@ -936,7 +1020,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.normalization.standardcompound.StandardCompoundNormalizerModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Name suffix">normalized</parameter>
                 <parameter name="Normalization type"/>
                 <parameter name="Peak measurement type"/>
@@ -953,7 +1037,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.io.mspexport.MSPExportModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Filename"/>
                 <parameter name="Fractional m/z values">false</parameter>
                 <parameter name="Merging Mode">Maximum</parameter>
@@ -961,7 +1045,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.io.sqlexport.SQLExportModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="JDBC connection string"/>
                 <parameter name="Database table"/>
                 <parameter name="Export columns"/>
@@ -970,20 +1054,23 @@
         </module>
         <module class="net.sf.mzmine.modules.masslistmethods.chromatogrambuilder.ChromatogramBuilderModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Scans">
                     <ms_level>1</ms_level>
                 </parameter>
                 <parameter name="Mass list"/>
                 <parameter name="Min time span (min)"/>
                 <parameter name="Min height"/>
-                <parameter name="m/z tolerance"/>
+                <parameter name="m/z tolerance">
+                    <absolutetolerance>0.001</absolutetolerance>
+                    <ppmtolerance>5.0</ppmtolerance>
+                </parameter>
                 <parameter name="Suffix">chromatograms</parameter>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.visualization.scatterplot.ScatterPlotVisualizerModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Window state">
                     <maximized>false</maximized>
                 </parameter>
@@ -1015,7 +1102,7 @@
         </module>
         <module class="net.sf.mzmine.modules.rawdatamethods.peakpicking.massdetection.MassDetectionModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Scans">
                     <ms_level>1</ms_level>
                 </parameter>
@@ -1046,7 +1133,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.dataanalysis.projectionplots.PCAPlotModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Raw data files" type="ALL_FILES"/>
                 <parameter name="Coloring type"/>
                 <parameter name="Peak measurement type"/>
@@ -1056,7 +1143,7 @@
         </module>
         <module class="net.sf.mzmine.modules.rawdatamethods.filtering.baselinecorrection.BaselineCorrectionModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Filename suffix">baseline-corrected</parameter>
                 <parameter name="Chromatogram type">TIC</parameter>
                 <parameter name="MS level">1</parameter>
@@ -1100,7 +1187,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.dataanalysis.rtmzplots.logratioplot.LogratioPlotModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Group one"/>
                 <parameter name="Group two"/>
                 <parameter name="Peak measurement type"/>
@@ -1108,7 +1195,7 @@
         </module>
         <module class="net.sf.mzmine.modules.rawdatamethods.peakpicking.gridmass.GridMassModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Scans">
                     <ms_level>1</ms_level>
                 </parameter>
@@ -1131,14 +1218,14 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.dataanalysis.rtmzplots.cvplot.CVPlotModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Data files"/>
                 <parameter name="Peak measurement type"/>
             </parameters>
         </module>
         <module class="net.sf.mzmine.modules.visualization.spectra.SpectraVisualizerModule">
             <parameters>
-                <parameter name="Raw data files"/>
+                <parameter name="Raw data files" type="GUI_SELECTED_FILES"/>
                 <parameter name="Scan number"/>
                 <parameter name="Window state">
                     <maximized>false</maximized>
@@ -1147,7 +1234,7 @@
         </module>
         <module class="net.sf.mzmine.modules.peaklistmethods.io.gnpsexport.GNPSExportModule">
             <parameters>
-                <parameter name="Peak lists"/>
+                <parameter name="Peak lists" type="GUI_SELECTED_PEAKLISTS"/>
                 <parameter name="Filename"/>
                 <parameter name="Mass list"/>
             </parameters>
